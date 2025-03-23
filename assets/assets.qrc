@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="resources">
+    <file>asena_main.png</file>
+    <file>asena_main.ico</file>
+    <file>main_label_transparent.png</file>
+    <file>close (2).png</file>
+    <file>minimize.png</file>
+    <file>user32px.png</file>
+    <file>key32px.png</file>
+  </qresource>
+</RCC>

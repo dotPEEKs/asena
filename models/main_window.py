@@ -15,9 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QHBoxLayout,
+    QHeaderView, QLabel, QMainWindow, QPushButton,
+    QSizePolicy, QSpacerItem, QStackedWidget, QTabWidget,
+    QTableWidget, QTableWidgetItem, QToolBox, QVBoxLayout,
+    QWidget)
 import assets_rc
 
 class Ui_MainWindow(object):
@@ -40,7 +42,14 @@ class Ui_MainWindow(object):
 "	background-color: rgb(0, 0, 0);\n"
 "}\n"
 "\n"
-"")
+"QTableWidget {\n"
+"	background-color: none;\n"
+"	border-radius: 3px;\n"
+"}	\n"
+"\n"
+"QTableCornerButton::section {\n"
+"	background-color: 'transparent';\n"
+"}")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setMinimumSize(QSize(859, 529))
@@ -145,7 +154,7 @@ class Ui_MainWindow(object):
 
         self.slide_sidebar = QFrame(self.main_container)
         self.slide_sidebar.setObjectName(u"slide_sidebar")
-        self.slide_sidebar.setMaximumSize(QSize(200, 16777215))
+        self.slide_sidebar.setMaximumSize(QSize(153, 16777215))
         self.slide_sidebar.setStyleSheet(u"")
         self.slide_sidebar.setFrameShape(QFrame.Shape.StyledPanel)
         self.slide_sidebar.setFrameShadow(QFrame.Shadow.Raised)
@@ -197,8 +206,11 @@ class Ui_MainWindow(object):
 
         self.inside_container = QFrame(self.main_container)
         self.inside_container.setObjectName(u"inside_container")
-        sizePolicy.setHeightForWidth(self.inside_container.sizePolicy().hasHeightForWidth())
-        self.inside_container.setSizePolicy(sizePolicy)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Ignored)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.inside_container.sizePolicy().hasHeightForWidth())
+        self.inside_container.setSizePolicy(sizePolicy1)
         self.inside_container.setFrameShape(QFrame.Shape.StyledPanel)
         self.inside_container.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout = QVBoxLayout(self.inside_container)
@@ -301,30 +313,105 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.header_frame)
 
-        self.main_page = QFrame(self.inside_container)
-        self.main_page.setObjectName(u"main_page")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.main_page.sizePolicy().hasHeightForWidth())
-        self.main_page.setSizePolicy(sizePolicy1)
-        self.main_page.setFrameShape(QFrame.Shape.StyledPanel)
-        self.main_page.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_7 = QHBoxLayout(self.main_page)
-        self.horizontalLayout_7.setSpacing(0)
+        self.stackedWidget = QStackedWidget(self.inside_container)
+        self.stackedWidget.setObjectName(u"stackedWidget")
+        self.pushbutton = QWidget()
+        self.pushbutton.setObjectName(u"pushbutton")
+        self.horizontalLayout_7 = QHBoxLayout(self.pushbutton)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
-        self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
-        self.embed_frame = QFrame(self.main_page)
-        self.embed_frame.setObjectName(u"embed_frame")
-        self.embed_frame.setFrameShape(QFrame.Shape.StyledPanel)
-        self.embed_frame.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_8 = QHBoxLayout(self.embed_frame)
+        self.pushButton = QPushButton(self.pushbutton)
+        self.pushButton.setObjectName(u"pushButton")
+
+        self.horizontalLayout_7.addWidget(self.pushButton)
+
+        self.pushButton_2 = QPushButton(self.pushbutton)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+
+        self.horizontalLayout_7.addWidget(self.pushButton_2)
+
+        self.stackedWidget.addWidget(self.pushbutton)
+        self.table_widget = QWidget()
+        self.table_widget.setObjectName(u"table_widget")
+        self.horizontalLayout_12 = QHBoxLayout(self.table_widget)
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.tableWidget = QTableWidget(self.table_widget)
+        if (self.tableWidget.columnCount() < 5):
+            self.tableWidget.setColumnCount(5)
+        if (self.tableWidget.rowCount() < 5):
+            self.tableWidget.setRowCount(5)
+        self.tableWidget.setObjectName(u"tableWidget")
+        self.tableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.tableWidget.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.tableWidget.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tableWidget.setRowCount(5)
+        self.tableWidget.setColumnCount(5)
+
+        self.horizontalLayout_12.addWidget(self.tableWidget)
+
+        self.stackedWidget.addWidget(self.table_widget)
+        self.toolbox = QWidget()
+        self.toolbox.setObjectName(u"toolbox")
+        self.horizontalLayout_8 = QHBoxLayout(self.toolbox)
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.toolBox = QToolBox(self.toolbox)
+        self.toolBox.setObjectName(u"toolBox")
+        self.page_3 = QWidget()
+        self.page_3.setObjectName(u"page_3")
+        self.page_3.setGeometry(QRect(0, 0, 624, 382))
+        self.toolBox.addItem(self.page_3, u"Page 1")
+        self.page_4 = QWidget()
+        self.page_4.setObjectName(u"page_4")
+        self.page_4.setGeometry(QRect(0, 0, 624, 382))
+        self.toolBox.addItem(self.page_4, u"Page 2")
 
-        self.horizontalLayout_7.addWidget(self.embed_frame)
+        self.horizontalLayout_8.addWidget(self.toolBox)
 
+        self.stackedWidget.addWidget(self.toolbox)
+        self.tab_3 = QWidget()
+        self.tab_3.setObjectName(u"tab_3")
+        self.horizontalLayout_9 = QHBoxLayout(self.tab_3)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.tabWidget = QTabWidget(self.tab_3)
+        self.tabWidget.setObjectName(u"tabWidget")
+        sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
+        self.tabWidget.setSizePolicy(sizePolicy)
+        self.tabWidget.setMovable(True)
+        self.tab = QWidget()
+        self.tab.setObjectName(u"tab")
+        self.horizontalLayout_10 = QHBoxLayout(self.tab)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.pushButton_4 = QPushButton(self.tab)
+        self.pushButton_4.setObjectName(u"pushButton_4")
 
-        self.verticalLayout.addWidget(self.main_page)
+        self.horizontalLayout_10.addWidget(self.pushButton_4)
+
+        self.pushButton_3 = QPushButton(self.tab)
+        self.pushButton_3.setObjectName(u"pushButton_3")
+
+        self.horizontalLayout_10.addWidget(self.pushButton_3)
+
+        self.tabWidget.addTab(self.tab, "")
+        self.tab_2 = QWidget()
+        self.tab_2.setObjectName(u"tab_2")
+        self.horizontalLayout_11 = QHBoxLayout(self.tab_2)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.pushButton_6 = QPushButton(self.tab_2)
+        self.pushButton_6.setObjectName(u"pushButton_6")
+
+        self.horizontalLayout_11.addWidget(self.pushButton_6)
+
+        self.pushButton_5 = QPushButton(self.tab_2)
+        self.pushButton_5.setObjectName(u"pushButton_5")
+
+        self.horizontalLayout_11.addWidget(self.pushButton_5)
+
+        self.tabWidget.addTab(self.tab_2, "")
+
+        self.horizontalLayout_9.addWidget(self.tabWidget)
+
+        self.stackedWidget.addWidget(self.tab_3)
+
+        self.verticalLayout.addWidget(self.stackedWidget)
 
 
         self.horizontalLayout_2.addWidget(self.inside_container)
@@ -335,6 +422,10 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
+
+        self.toolBox.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(0)
+
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
@@ -361,5 +452,15 @@ class Ui_MainWindow(object):
         self.minimize_btn.setText("")
         self.maximize_btn.setText("")
         self.close_btn.setText("")
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_3), QCoreApplication.translate("MainWindow", u"Page 1", None))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_4), QCoreApplication.translate("MainWindow", u"Page 2", None))
+        self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Genel", None))
+        self.pushButton_6.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Veritaban\u0131", None))
     # retranslateUi
 

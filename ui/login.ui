@@ -28,16 +28,19 @@
   <property name="styleSheet">
    <string notr="true">QFrame#main_frame  {
 		border-radius: 10px;
-		background-color: #33081d;
+		background-color: &quot;black&quot;;
 }
 
 QLineEdit { 
-	background-color: #bd3c7a;
+    background-color: &quot;white&quot;;
 	font: 700 11pt &quot;Arial&quot;;
+    color: &quot;black&quot;;
     border-radius: 10px;
     padding: 10;
     background-repeat: no-repeat;
     background-position: right;
+    border: 3px solid;
+	border-color: #245bd1;
 }
 
 QLineEdit#passwd {
@@ -53,7 +56,14 @@ QLabel#login_panel_main_text {
 	font: 700 22pt &quot;Arial&quot;;
 }
 
+QLabel#status_label {
+	font: 700 11pt &quot;Arial&quot;;
+    padding: 10px;
+}
 
+QLabel#main_label {
+	font: 700 28pt &quot;Arial&quot;;
+}
 QPushButton {
     border-radius: 10px;
 	font: 700 11pt &quot;Arial&quot;;
@@ -61,7 +71,7 @@ QPushButton {
 }
 
 QPushButton#login_btn {
-	background-color: #bd3c7a;
+	background-color: #245bd1;
 }
 
 QPushButton#login_btn:hover {
@@ -69,7 +79,7 @@ QPushButton#login_btn:hover {
 }
 
 QPushButton#exit_btn {
-	background-color: #bd3c7a;
+	background-color: #245bd1;
 }
 
 QPushButton#exit_btn:hover {
@@ -77,7 +87,7 @@ QPushButton#exit_btn:hover {
 }
 
 QPushButton#close_btn {
-	background-color: none;
+	background-color: #245bd1;
 }
 
 QPushButton#close_btn:hover {
@@ -85,7 +95,7 @@ QPushButton#close_btn:hover {
 }
 
 QPushButton#minimize_btn {
-	background-color: none;
+	background-color: #245bd1;
 }
 
 QPushButton#minimize_btn:hover {
@@ -160,7 +170,8 @@ QLabel#footer_text {
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">padding: 2px;</string>
+            <string notr="true">
+padding: 3px;</string>
            </property>
            <property name="frameShape">
             <enum>QFrame::Shape::NoFrame</enum>
@@ -169,11 +180,23 @@ QLabel#footer_text {
             <enum>QFrame::Shadow::Raised</enum>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <property name="spacing">
+             <number>3</number>
+            </property>
+            <property name="sizeConstraint">
+             <enum>QLayout::SizeConstraint::SetMinimumSize</enum>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
             <property name="topMargin">
              <number>0</number>
             </property>
             <property name="rightMargin">
-             <number>5</number>
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>7</number>
             </property>
             <item>
              <widget class="QPushButton" name="minimize_btn">
@@ -199,7 +222,7 @@ QLabel#footer_text {
               </property>
               <property name="icon">
                <iconset resource="../assets/assets.qrc">
-                <normaloff>:/resources/close (2).png</normaloff>:/resources/close (2).png</iconset>
+                <normaloff>:/resources/close.png</normaloff>:/resources/close.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -213,15 +236,43 @@ QLabel#footer_text {
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="login_panel_main_text">
-           <property name="text">
-            <string/>
+          <widget class="QFrame" name="icon_frame">
+           <property name="frameShape">
+            <enum>QFrame::Shape::NoFrame</enum>
            </property>
-           <property name="pixmap">
-            <pixmap resource="../assets/assets.qrc">:/resources/main_label_transparent.png</pixmap>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_8">
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="icon_label">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../assets/assets.qrc">:/resources/rose32px.png</pixmap>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignHCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="main_label">
+           <property name="text">
+            <string>ASENA</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignCenter</set>
+            <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -307,6 +358,9 @@ QLabel#footer_text {
             <property name="topMargin">
              <number>0</number>
             </property>
+            <property name="bottomMargin">
+             <number>10</number>
+            </property>
             <item alignment="Qt::AlignmentFlag::AlignTop">
              <widget class="QLineEdit" name="passwd">
               <property name="sizePolicy">
@@ -333,6 +387,67 @@ QLabel#footer_text {
               <property name="placeholderText">
                <string>Lütfen Şifre Giriniz.</string>
               </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="status_label_container">
+              <property name="minimumSize">
+               <size>
+                <width>282</width>
+                <height>36</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>282</width>
+                <height>96</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::Shape::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>3</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>4</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="status_label">
+                 <property name="minimumSize">
+                  <size>
+                   <width>280</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>280</width>
+                   <height>96</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </widget>
             </item>
            </layout>

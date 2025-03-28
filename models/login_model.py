@@ -16,10 +16,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QVBoxLayout,
-    QWidget)
+    QLayout, QLineEdit, QPushButton, QSizePolicy,
+    QVBoxLayout, QWidget)
 from assets import assets
-
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
@@ -29,16 +28,19 @@ class Ui_Form(object):
         Form.setMaximumSize(QSize(504, 616))
         Form.setStyleSheet(u"QFrame#main_frame  {\n"
 "		border-radius: 10px;\n"
-"		background-color: #33081d;\n"
+"		background-color: \"black\";\n"
 "}\n"
 "\n"
 "QLineEdit { \n"
-"	background-color: #bd3c7a;\n"
+"    background-color: \"white\";\n"
 "	font: 700 11pt \"Arial\";\n"
+"    color: \"black\";\n"
 "    border-radius: 10px;\n"
 "    padding: 10;\n"
 "    background-repeat: no-repeat;\n"
 "    background-position: right;\n"
+"    border: 3px solid;\n"
+"	border-color: #245bd1;\n"
 "}\n"
 "\n"
 "QLineEdit#passwd {\n"
@@ -54,7 +56,14 @@ class Ui_Form(object):
 "	font: 700 22pt \"Arial\";\n"
 "}\n"
 "\n"
+"QLabel#status_label {\n"
+"	font: 700 11pt \"Arial\";\n"
+"    padding: 10px;\n"
+"}\n"
 "\n"
+"QLabel#main_label {\n"
+"	font: 700 28pt \"Arial\";\n"
+"}\n"
 "QPushButton {\n"
 "    border-radius: 10px;\n"
 "	font: 700 11pt \"Arial\";\n"
@@ -62,15 +71,16 @@ class Ui_Form(object):
 "}\n"
 "\n"
 "QPushButton#login_btn {\n"
-"	background-color: #bd3c7a;\n"
+"	background-color: #245bd1;\n"
 "}\n"
 "\n"
 "QPushButton#login_btn:hover {\n"
-"	background-color: \"black\";\n"
+"	background-co"
+                        "lor: \"black\";\n"
 "}\n"
 "\n"
 "QPushButton#exit_btn {\n"
-"	background-color: #bd3c7a;\n"
+"	background-color: #245bd1;\n"
 "}\n"
 "\n"
 "QPushButton#exit_btn:hover {\n"
@@ -78,16 +88,15 @@ class Ui_Form(object):
 "}\n"
 "\n"
 "QPushButton#close_btn {\n"
-"	background-color: none;\n"
-""
-                        "}\n"
+"	background-color: #245bd1;\n"
+"}\n"
 "\n"
 "QPushButton#close_btn:hover {\n"
 "	background-color: \"#bbbfbc\";\n"
 "}\n"
 "\n"
 "QPushButton#minimize_btn {\n"
-"	background-color: none;\n"
+"	background-color: #245bd1;\n"
 "}\n"
 "\n"
 "QPushButton#minimize_btn:hover {\n"
@@ -120,12 +129,15 @@ class Ui_Form(object):
         self.btn_frame.setObjectName(u"btn_frame")
         self.btn_frame.setMinimumSize(QSize(30, 30))
         self.btn_frame.setMaximumSize(QSize(70, 40))
-        self.btn_frame.setStyleSheet(u"padding: 2px;")
+        self.btn_frame.setStyleSheet(u"\n"
+"padding: 3px;")
         self.btn_frame.setFrameShape(QFrame.Shape.NoFrame)
         self.btn_frame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_3 = QHBoxLayout(self.btn_frame)
+        self.horizontalLayout_3.setSpacing(3)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalLayout_3.setContentsMargins(-1, 0, 5, -1)
+        self.horizontalLayout_3.setSizeConstraint(QLayout.SizeConstraint.SetMinimumSize)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 7)
         self.minimize_btn = QPushButton(self.btn_frame)
         self.minimize_btn.setObjectName(u"minimize_btn")
         icon = QIcon()
@@ -139,7 +151,7 @@ class Ui_Form(object):
         self.close_btn.setObjectName(u"close_btn")
         self.close_btn.setStyleSheet(u"")
         icon1 = QIcon()
-        icon1.addFile(u":/resources/close (2).png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon1.addFile(u":/resources/close.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.close_btn.setIcon(icon1)
         self.close_btn.setIconSize(QSize(16, 16))
 
@@ -148,12 +160,29 @@ class Ui_Form(object):
 
         self.verticalLayout_6.addWidget(self.btn_frame, 0, Qt.AlignmentFlag.AlignRight)
 
-        self.login_panel_main_text = QLabel(self.footer)
-        self.login_panel_main_text.setObjectName(u"login_panel_main_text")
-        self.login_panel_main_text.setPixmap(QPixmap(u":/resources/main_label_transparent.png"))
-        self.login_panel_main_text.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.icon_frame = QFrame(self.footer)
+        self.icon_frame.setObjectName(u"icon_frame")
+        self.icon_frame.setFrameShape(QFrame.Shape.NoFrame)
+        self.icon_frame.setFrameShadow(QFrame.Shadow.Raised)
+        self.verticalLayout_8 = QVBoxLayout(self.icon_frame)
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.verticalLayout_8.setContentsMargins(-1, -1, -1, 0)
+        self.icon_label = QLabel(self.icon_frame)
+        self.icon_label.setObjectName(u"icon_label")
+        self.icon_label.setPixmap(QPixmap(u":/resources/rose32px.png"))
+        self.icon_label.setAlignment(Qt.AlignmentFlag.AlignBottom|Qt.AlignmentFlag.AlignHCenter)
 
-        self.verticalLayout_6.addWidget(self.login_panel_main_text)
+        self.verticalLayout_8.addWidget(self.icon_label)
+
+
+        self.verticalLayout_6.addWidget(self.icon_frame)
+
+        self.main_label = QLabel(self.footer)
+        self.main_label.setObjectName(u"main_label")
+        self.main_label.setAlignment(Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
+        self.main_label.setWordWrap(False)
+
+        self.verticalLayout_6.addWidget(self.main_label)
 
 
         self.verticalLayout.addWidget(self.footer)
@@ -199,7 +228,7 @@ class Ui_Form(object):
         self.frame_4.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_3 = QVBoxLayout(self.frame_4)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.verticalLayout_3.setContentsMargins(-1, 0, -1, -1)
+        self.verticalLayout_3.setContentsMargins(-1, 0, -1, 10)
         self.passwd = QLineEdit(self.frame_4)
         self.passwd.setObjectName(u"passwd")
         sizePolicy1.setHeightForWidth(self.passwd.sizePolicy().hasHeightForWidth())
@@ -209,6 +238,27 @@ class Ui_Form(object):
         self.passwd.setMaxLength(34)
 
         self.verticalLayout_3.addWidget(self.passwd, 0, Qt.AlignmentFlag.AlignTop)
+
+        self.status_label_container = QFrame(self.frame_4)
+        self.status_label_container.setObjectName(u"status_label_container")
+        self.status_label_container.setMinimumSize(QSize(282, 36))
+        self.status_label_container.setMaximumSize(QSize(282, 96))
+        self.status_label_container.setFrameShape(QFrame.Shape.NoFrame)
+        self.status_label_container.setFrameShadow(QFrame.Shadow.Raised)
+        self.horizontalLayout_4 = QHBoxLayout(self.status_label_container)
+        self.horizontalLayout_4.setSpacing(0)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(0, 3, 0, 4)
+        self.status_label = QLabel(self.status_label_container)
+        self.status_label.setObjectName(u"status_label")
+        self.status_label.setMinimumSize(QSize(280, 36))
+        self.status_label.setMaximumSize(QSize(280, 96))
+        self.status_label.setWordWrap(True)
+
+        self.horizontalLayout_4.addWidget(self.status_label)
+
+
+        self.verticalLayout_3.addWidget(self.status_label_container)
 
 
         self.verticalLayout_2.addWidget(self.frame_4)
@@ -284,9 +334,11 @@ class Ui_Form(object):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.minimize_btn.setText("")
         self.close_btn.setText("")
-        self.login_panel_main_text.setText("")
+        self.icon_label.setText("")
+        self.main_label.setText(QCoreApplication.translate("Form", u"ASENA", None))
         self.username.setPlaceholderText(QCoreApplication.translate("Form", u"L\u00fctfen Kullan\u0131c\u0131 ad\u0131 giriniz.", None))
         self.passwd.setPlaceholderText(QCoreApplication.translate("Form", u"L\u00fctfen \u015eifre Giriniz.", None))
+        self.status_label.setText("")
         self.exit_btn.setText(QCoreApplication.translate("Form", u"\u00c7\u0131k\u0131\u015f", None))
         self.login_btn.setText(QCoreApplication.translate("Form", u"Giri\u015f", None))
         self.footer_text.setText(QCoreApplication.translate("Form", u"Coded By DotPEEK", None))

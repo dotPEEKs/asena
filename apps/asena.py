@@ -45,7 +45,7 @@ class AsenaMainWindow(QMainWindow,Ui_MainWindow):
         print(self.slide_sidebar.width())
         if self.slide_sidebar.width() == 0:
             # sidebar is opening
-            print("Oynatıyom knk")
+
             self.slide_sidebar_animation_handler.setStartValue(QRect(61, 1, collapsed_width, self.height()))
             self.slide_sidebar_animation_handler.setEndValue(QRect(61, 1, sidebar_width, self.height()))
 
@@ -54,7 +54,7 @@ class AsenaMainWindow(QMainWindow,Ui_MainWindow):
             self.inside_container_animation_handler.setEndValue(
                 QRect(61 + sidebar_width, 1, main_width - (61 + sidebar_width), self.height()))
         else:
-            print("Yavaş la gaç tane alıyon")
+
             # sidebar is closing
             self.slide_sidebar_animation_handler.setStartValue(QRect(61, 1, sidebar_width, self.height()))
             self.slide_sidebar_animation_handler.setEndValue(QRect(61, 1, collapsed_width, self.height()))

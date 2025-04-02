@@ -7,7 +7,7 @@ from PySide6.QtCore import Qt,QPoint
 from models.login_model import Ui_Form
 from models.frameless_window import FramelessWindow
 from apps.asena import AsenaMainWindow
-from assets import assets
+
 class Login(QWidget,Ui_Form,FramelessWindow):
     def __init__(self,parent):
         super().__init__()

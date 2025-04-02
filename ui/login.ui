@@ -28,7 +28,7 @@
   <property name="styleSheet">
    <string notr="true">QFrame#main_frame  {
 		border-radius: 10px;
-		background-color: &quot;black&quot;;
+		background-color: &quot;#1c1c30&quot;;
 }
 
 QLineEdit { 
@@ -39,8 +39,8 @@ QLineEdit {
     padding: 10;
     background-repeat: no-repeat;
     background-position: right;
-    border: 3px solid;
-	border-color: #245bd1;
+    border: 3px solid  #625fb8;
+
 }
 
 QLineEdit#passwd {
@@ -65,43 +65,15 @@ QLabel#main_label {
 	font: 700 28pt &quot;Arial&quot;;
 }
 QPushButton {
+	background-color: #625fb8;
     border-radius: 10px;
 	font: 700 11pt &quot;Arial&quot;;
 
 }
 
-QPushButton#login_btn {
-	background-color: #245bd1;
+QPushButton:hover {
+	background-color: #8784e0;
 }
-
-QPushButton#login_btn:hover {
-	background-color: &quot;black&quot;;
-}
-
-QPushButton#exit_btn {
-	background-color: #245bd1;
-}
-
-QPushButton#exit_btn:hover {
-	background-color: &quot;black&quot;;
-}
-
-QPushButton#close_btn {
-	background-color: #245bd1;
-}
-
-QPushButton#close_btn:hover {
-	background-color: &quot;#bbbfbc&quot;;
-}
-
-QPushButton#minimize_btn {
-	background-color: #245bd1;
-}
-
-QPushButton#minimize_btn:hover {
-	background-color: &quot;#bbbfbc&quot;;
-}
-
 QLabel#footer_text {
 		font: 700 11pt &quot;Arial&quot;;
 }</string>

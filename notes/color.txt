@@ -12,3 +12,16 @@ QFrame {
 
 
 # SOL FRAME MIN SIZE 201 542
+
+
+background-color: #625fb8;
+
+QPushButton {	
+
+	font: 700 11pt "Arial";
+	height: 38px;
+}
+
+QPushButton#exit_btn:hover {
+	background-color: "red";
+}

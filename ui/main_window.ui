@@ -17,7 +17,9 @@
    <string notr="true">QFrame {
 	background-color: &quot;#1c1c30&quot;;
 }
-
+QFrame#main_container {
+	border-radius: 10px;
+}
 QLabel {
 	font: 700 18pt &quot;Arial&quot;;
 }
@@ -669,8 +671,8 @@ QStackedWidget {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>70</width>
-                   <height>16</height>
+                   <width>100</width>
+                   <height>30</height>
                   </rect>
                  </property>
                  <attribute name="label">
@@ -754,18 +756,7 @@ QStackedWidget {
               <item>
                <widget class="QStackedWidget" name="options_tab">
                 <widget class="QWidget" name="db_management_tab">
-                 <layout class="QHBoxLayout" name="horizontalLayout_10">
-                  <item>
-                   <widget class="QFrame" name="frame">
-                    <property name="frameShape">
-                     <enum>QFrame::Shape::StyledPanel</enum>
-                    </property>
-                    <property name="frameShadow">
-                     <enum>QFrame::Shadow::Raised</enum>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
+                 <layout class="QHBoxLayout" name="horizontalLayout_10"/>
                 </widget>
                 <widget class="QWidget" name="reset_tab"/>
                </widget>

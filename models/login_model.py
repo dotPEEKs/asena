@@ -18,7 +18,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
     QLayout, QLineEdit, QPushButton, QSizePolicy,
     QVBoxLayout, QWidget)
-import assets
+from assets import assets
+
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
@@ -28,7 +29,7 @@ class Ui_Form(object):
         Form.setMaximumSize(QSize(504, 616))
         Form.setStyleSheet(u"QFrame#main_frame  {\n"
 "		border-radius: 10px;\n"
-"		background-color: \"black\";\n"
+"		background-color: \"#1c1c30\";\n"
 "}\n"
 "\n"
 "QLineEdit { \n"
@@ -39,8 +40,8 @@ class Ui_Form(object):
 "    padding: 10;\n"
 "    background-repeat: no-repeat;\n"
 "    background-position: right;\n"
-"    border: 3px solid;\n"
-"	border-color: #245bd1;\n"
+"    border: 3px solid  #625fb8;\n"
+"\n"
 "}\n"
 "\n"
 "QLineEdit#passwd {\n"
@@ -65,46 +66,18 @@ class Ui_Form(object):
 "	font: 700 28pt \"Arial\";\n"
 "}\n"
 "QPushButton {\n"
+"	background-color: #625fb8;\n"
 "    border-radius: 10px;\n"
 "	font: 700 11pt \"Arial\";\n"
 "\n"
 "}\n"
 "\n"
-"QPushButton#login_btn {\n"
-"	background-color: #245bd1;\n"
+"QPushButton:hover {\n"
+"	background-color: #8784e0;\n"
 "}\n"
-"\n"
-"QPushButton#login_btn:hover {\n"
-"	background-co"
-                        "lor: \"black\";\n"
-"}\n"
-"\n"
-"QPushButton#exit_btn {\n"
-"	background-color: #245bd1;\n"
-"}\n"
-"\n"
-"QPushButton#exit_btn:hover {\n"
-"	background-color: \"black\";\n"
-"}\n"
-"\n"
-"QPushButton#close_btn {\n"
-"	background-color: #245bd1;\n"
-"}\n"
-"\n"
-"QPushButton#close_btn:hover {\n"
-"	background-color: \"#bbbfbc\";\n"
-"}\n"
-"\n"
-"QPushButton#minimize_btn {\n"
-"	background-color: #245bd1;\n"
-"}\n"
-"\n"
-"QPushButton#minimize_btn:hover {\n"
-"	background-color: \"#bbbfbc\";\n"
-"}\n"
-"\n"
 "QLabel#footer_text {\n"
-"		font: 700 11pt \"Arial\";\n"
+"		font: 700 "
+                        "11pt \"Arial\";\n"
 "}")
         self.horizontalLayout = QHBoxLayout(Form)
         self.horizontalLayout.setSpacing(0)

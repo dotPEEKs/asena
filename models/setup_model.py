@@ -18,8 +18,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QCheckBox, QFrame, QHBoxLayout,
     QLabel, QLineEdit, QPushButton, QSizePolicy,
     QTextEdit, QVBoxLayout, QWidget)
-import assets_rc
-
+from assets import assets
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
@@ -48,7 +47,7 @@ class Ui_Form(object):
 "}\n"
 "\n"
 "QLineEdit { \n"
-"    background-color: \"white\";\n"
+"    background-color: #625fb8;\n"
 "	font: 700 11pt \"Arial\";\n"
 "    color: \"black\";\n"
 "    border-radius: 10px;\n"
@@ -56,7 +55,11 @@ class Ui_Form(object):
 "    background-repeat: no-repeat;\n"
 "    background-position: right;\n"
 "    border: 3px solid  #625fb8;\n"
+"}\n"
 "\n"
+"QLineEdit#setup_path {\n"
+"	background-image: url(:/resources/folder32px.png);\n"
+"	background-position: right;\n"
 "}\n"
 "\n"
 "QTextEdit {\n"
@@ -132,6 +135,7 @@ class Ui_Form(object):
 
         self.textEdit = QTextEdit(self.main_widget)
         self.textEdit.setObjectName(u"textEdit")
+        self.textEdit.setMaximumSize(QSize(16777215, 0))
         self.textEdit.setFrameShape(QFrame.Shape.NoFrame)
         self.textEdit.setTextInteractionFlags(Qt.TextInteractionFlag.NoTextInteraction)
 

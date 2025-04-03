@@ -17,10 +17,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QHBoxLayout,
     QHeaderView, QLabel, QMainWindow, QPushButton,
-    QScrollArea, QSizePolicy, QSpacerItem, QStackedWidget,
-    QTableWidget, QTableWidgetItem, QToolBox, QVBoxLayout,
-    QWidget)
-import assets_rc
+    QSizePolicy, QSpacerItem, QStackedWidget, QTableWidget,
+    QTableWidgetItem, QToolBox, QVBoxLayout, QWidget)
+from assets import assets
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -30,7 +29,9 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet(u"QFrame {\n"
 "	background-color: \"#1c1c30\";\n"
 "}\n"
-"\n"
+"QFrame#main_container {\n"
+"	border-radius: 10px;\n"
+"}\n"
 "QLabel {\n"
 "	font: 700 18pt \"Arial\";\n"
 "}\n"
@@ -365,7 +366,7 @@ class Ui_MainWindow(object):
         self.toolBox.setObjectName(u"toolBox")
         self.page_3 = QWidget()
         self.page_3.setObjectName(u"page_3")
-        self.page_3.setGeometry(QRect(0, 0, 70, 16))
+        self.page_3.setGeometry(QRect(0, 0, 100, 30))
         self.toolBox.addItem(self.page_3, u"Page 1")
         self.page_4 = QWidget()
         self.page_4.setObjectName(u"page_4")
@@ -421,68 +422,6 @@ class Ui_MainWindow(object):
         self.db_management_tab.setObjectName(u"db_management_tab")
         self.horizontalLayout_10 = QHBoxLayout(self.db_management_tab)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
-        self.scrollArea = QScrollArea(self.db_management_tab)
-        self.scrollArea.setObjectName(u"scrollArea")
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollAreaWidgetContents = QWidget()
-        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 612, 356))
-        self.verticalLayout_5 = QVBoxLayout(self.scrollAreaWidgetContents)
-        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.label = QLabel(self.scrollAreaWidgetContents)
-        self.label.setObjectName(u"label")
-
-        self.verticalLayout_5.addWidget(self.label)
-
-        self.label_4 = QLabel(self.scrollAreaWidgetContents)
-        self.label_4.setObjectName(u"label_4")
-
-        self.verticalLayout_5.addWidget(self.label_4)
-
-        self.label_3 = QLabel(self.scrollAreaWidgetContents)
-        self.label_3.setObjectName(u"label_3")
-
-        self.verticalLayout_5.addWidget(self.label_3)
-
-        self.label_2 = QLabel(self.scrollAreaWidgetContents)
-        self.label_2.setObjectName(u"label_2")
-
-        self.verticalLayout_5.addWidget(self.label_2)
-
-        self.label_5 = QLabel(self.scrollAreaWidgetContents)
-        self.label_5.setObjectName(u"label_5")
-
-        self.verticalLayout_5.addWidget(self.label_5)
-
-        self.label_6 = QLabel(self.scrollAreaWidgetContents)
-        self.label_6.setObjectName(u"label_6")
-
-        self.verticalLayout_5.addWidget(self.label_6)
-
-        self.label_9 = QLabel(self.scrollAreaWidgetContents)
-        self.label_9.setObjectName(u"label_9")
-
-        self.verticalLayout_5.addWidget(self.label_9)
-
-        self.label_8 = QLabel(self.scrollAreaWidgetContents)
-        self.label_8.setObjectName(u"label_8")
-
-        self.verticalLayout_5.addWidget(self.label_8)
-
-        self.label_7 = QLabel(self.scrollAreaWidgetContents)
-        self.label_7.setObjectName(u"label_7")
-
-        self.verticalLayout_5.addWidget(self.label_7)
-
-        self.label_10 = QLabel(self.scrollAreaWidgetContents)
-        self.label_10.setObjectName(u"label_10")
-
-        self.verticalLayout_5.addWidget(self.label_10)
-
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
-
-        self.horizontalLayout_10.addWidget(self.scrollArea)
-
         self.options_tab.addWidget(self.db_management_tab)
         self.reset_tab = QWidget()
         self.reset_tab.setObjectName(u"reset_tab")
@@ -541,15 +480,5 @@ class Ui_MainWindow(object):
         self.reset_btn.setText(QCoreApplication.translate("MainWindow", u"S\u0131f\u0131rlama", None))
         self.common_btn.setText(QCoreApplication.translate("MainWindow", u"Genel", None))
         self.not_implented.setText(QCoreApplication.translate("MainWindow", u"not_implented", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_6.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_9.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_8.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_7.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_10.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
     # retranslateUi
 

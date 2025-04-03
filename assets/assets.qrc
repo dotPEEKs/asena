@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="resources">
     <file>database_btn.png</file>
+    <file>folder32px.png</file>
     <file>endorsement_btn.png</file>
     <file>order_aproved.png</file>
     <file>sidebar_toggle.png</file>

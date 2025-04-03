@@ -33,6 +33,7 @@ class AsenaMainWindow(QMainWindow,Ui_MainWindow):
         self.setWindowIcon(QIcon(u":/resources/asena_main.ico"))
         self._drag_position = QPoint()
         self.set_all_signals()
+        self.setWindowFlags(Qt.FramelessWindowHint)
         self.inside_container_animation_handler = self.create_animation_object(self.inside_container)
         self.slide_sidebar_animation_handler = self.create_animation_object(self.slide_sidebar)
         self.stretch_all_table_widgets()
@@ -89,6 +90,9 @@ class AsenaMainWindow(QMainWindow,Ui_MainWindow):
        self.orders_history_btn.clicked.connect(lambda:self.stackedWidget.setCurrentIndex(2))
        self.orders_screen_btn.clicked.connect(lambda:self.stackedWidget.setCurrentIndex(0))
        self.endorsement_btn.clicked.connect(lambda:self.stackedWidget.setCurrentIndex(3))
+       self.close_btn.clicked.connect(self.close)
+       self.minimize_btn.clicked.connect(self.showMinimized)
+       self.maximize_btn.clicked.connect(self.showMaximized)
        self.sidebar_toggle_btn.clicked.connect(self.handle_sidebar)
     def stretch_all_table_widgets(self):
         #NOTE -> FindChildren returns many objects

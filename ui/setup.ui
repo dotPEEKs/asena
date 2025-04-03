@@ -47,7 +47,7 @@ QPushButton:hover {
 }
 
 QLineEdit { 
-    background-color: &quot;white&quot;;
+    background-color: #625fb8;
 	font: 700 11pt &quot;Arial&quot;;
     color: &quot;black&quot;;
     border-radius: 10px;
@@ -55,7 +55,11 @@ QLineEdit {
     background-repeat: no-repeat;
     background-position: right;
     border: 3px solid  #625fb8;
+}
 
+QLineEdit#setup_path {
+	background-image: url(:/resources/folder32px.png);
+	background-position: right;
 }
 
 QTextEdit {
@@ -180,6 +184,12 @@ QTextEdit {
       </item>
       <item>
        <widget class="QTextEdit" name="textEdit">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="frameShape">
          <enum>QFrame::Shape::NoFrame</enum>
         </property>

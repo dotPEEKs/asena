@@ -1,3 +1,7 @@
 # Yeni kafe yönetim uygulaması 
 
-* sadece login sayfası mevcuttur 
+# Uygulamaları çalıştırmak için
+  - apps\asena - ana uygulama
+  - apps\login - giriş sayfası
+  - apps\setup - kurulum uygulaması
+* Unutmayın proje hala tam değildir !

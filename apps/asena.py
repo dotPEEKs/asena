@@ -30,6 +30,7 @@ class AsenaMainWindow(QMainWindow,Ui_MainWindow):
     def __init__(self):
         super().__init__() # initialize all class
         self.setupUi(self)
+        self.main_container.setStyleSheet("border-radius: 10px;")
         self.setWindowIcon(QIcon(u":/resources/asena_main.ico"))
         self._drag_position = QPoint()
         self.set_all_signals()
@@ -37,7 +38,7 @@ class AsenaMainWindow(QMainWindow,Ui_MainWindow):
         self.inside_container_animation_handler = self.create_animation_object(self.inside_container)
         self.slide_sidebar_animation_handler = self.create_animation_object(self.slide_sidebar)
         self.stretch_all_table_widgets()
-
+        self.orders_history_btn.setCheckable(False)
     def handle_sidebar(self):
         sidebar_width = 153
         collapsed_width = 0

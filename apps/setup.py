@@ -1,68 +1,88 @@
 import os
 import sys
-import winreg
 
-from PySide6.QtCore import QSize
+from pandas.core.dtypes.base import Registry
 
 sys.path.append(os.path.join(os.path.dirname(__file__),".."))
 
 
+from PySide6.QtCore import QThreadPool
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QWidget
 from PySide6.QtWidgets import QMessageBox
 from PySide6.QtWidgets import QApplication
 from PySide6.QtWidgets import QFileDialog
 from models.setup_model import Ui_Form
-from utils.reg_utils import Registry,HKEY
-from utils.fs import WriteOk,ReadOk
+
+from enums.defaults import Defaults
+from utils.fs import WriteOk,ReadOk,copyfile2dst
+from source.setup import SetupModule
+from source.setup import Signals
+from source.setup import ThreadWorker
+from utils import create_new_logger_instance
+
+logger = create_new_logger_instance(Defaults.DEFAULT_LOG_FILE_PATH)
+
 class SetupUI(QWidget,Ui_Form):
+    """
+    kod düzenlemesi yapılacak
+    text_edit min'den max'e çekilecek
+    """
     def __init__(self):
-        QWidget.__init__(self)
+        super(SetupUI,self).__init__()
         self.setupUi(self)
-        self.setup_path.mousePressEvent = self.open_file_dialog # its calls a function when press on linedit
-        self.setWindowTitle("Asena - Setup")
-        self.setWindowIcon(QIcon(u":/resources/asena_main.ico"))
-        self.default_path = r"C:\Users\alper\Desktop"
-        self.setup_path.setText(self.default_path)
+        self.set_line_edit_path()
         self.set_all_signals()
-        self.registry = Registry(HKEY.HKEY_CURRENT_USER,r"Software\Asena")
-    def open_file_dialog(self,*args,**kwargs):
-        file_dialog = QFileDialog()
-        file_dialog.setWindowTitle("Kurulum patikası seçiniz !")
-        file_dialog.setFileMode(QFileDialog.Directory)
-        file_dialog.exec()
-        directory = file_dialog.selectedFiles()
-        if len(directory) > 0:
-            directory = directory[0].replace("/","\\")
-            if WriteOk(directory) and ReadOk(directory):
-                self.setup_path.setText(directory)
-            else:
-                message_box = QMessageBox()
-                message_box.setWindowTitle("Hata")
-                message_box.setWindowIcon(QIcon(u":/resources/asena_main.ico"))
-                message_box.setText("Verilen klasör kurulum için uygunsuz (Gerekli izinlere sahip değil (read/write))")
-                message_box.setStandardButtons(QMessageBox.StandardButton.Ok)
-                message_box.exec()
+    def launch_file_dialog(self):
+        file_dialog_window = QFileDialog()
+        file_dialog_window.setWindowTitle("Patika seçin ")
+        file_dialog_window.setWindowIcon(QIcon(u":/resources/asena_main.ico"))
+        file_dialog_window.setFileMode(QFileDialog.FileMode.Directory)
+        file_dialog_window.exec()
+        directory = file_dialog_window.selectedFiles()[0].replace("/","\\")
+        if not WriteOk(directory) and not ReadOk(directory): # path has no write/read permission
+            message_box = QMessageBox()
+            message_box.setText("Uygun olmayan patika :/ seçilen patika uygun özellikleri taşımıyor :/ (R/W)")
+            message_box.setWindowIcon(QIcon(u":/resources/asena_main.ico"))
+            message_box.setStandardButtons(QMessageBox.StandardButton.Ok)
+            message_box.setWindowTitle("Hata")
+            message_box.exec()
+        else:
+            self.path_line_edit.setText(directory)
+    def setup(self):
+        self.status_line.setMaximumHeight(Defaults.DEFAULT_MAX_WINDOW_SIZE)
+        self.qmain_thread = QThreadPool().globalInstance()
+        self.signals = Signals()
+        setup_handler = SetupModule(__file__,self.persistance_btn.isChecked(),self.path_line_edit.text())
+        setup_handler.signal_function = self.signals.progress.emit
+        self.signals.progress.connect(self.setup_progress)
+        self.worker = ThreadWorker(setup_handler)
+        self.qmain_thread.start(self.worker)
+
     def set_all_signals(self):
-        self.exit_btn.clicked.connect(lambda:self.close())
-        self.setup_btn.clicked.connect(self.handle_setup_progress)
-    def append_text(self,text: str):
-        self.action_list.append(text)
-    def create_required_registry_keys(self):
-        setup_path = "\"%s\"" % (os.path.join(self.setup_path.text(),"asena.exe"))
-        if self.persistance_btn.isChecked():
-            self.registry.sub_path = r"Software\Microsoft\Windows\CurrentVersion\Run"
-            reg_handler.write_key("Asena","\"%s\"" % (setup_path))
-        self.registry.sub_path = r"Software\Asena"
-        self.registry.write_key("SetupPath",setup_path)
-        self.registry.write_key("DividedSalt",os.urandom(100),data_type = winreg.REG_BINARY)
-
-    def handle_setup_progress(self):
-        # disable line edit events
-        self.setup_path.mousePressEvent = lambda *args:None # Void lambda function
-        self.setup_path.setReadOnly(True)
-        self.create_required_registry_keys()
-
+        self.file_dialog_btn.clicked.connect(self.launch_file_dialog)
+        self.setup_btn.clicked.connect(self.setup)
+    def set_line_edit_path(self):
+        self.path_line_edit.mousePressEvent = self.reset_line_edit
+        self.path_line_edit.setText(Defaults.DEFAULT_SETUP_PATH)
+    def reset_line_edit(self,*args,**kwargs):
+        self.path_line_edit.setText(Defaults.DEFAULT_SETUP_PATH)
+    def setup_progress(self,intuple: tuple):
+        crash_text = intuple[0]
+        progress_status = intuple[1] #
+        if not progress_status:
+            msgbox = QMessageBox()
+            msgbox.setText(crash_text)
+            msgbox.setWindowIcon(QIcon(u":/resources/asena_main.ico"))
+            msgbox.setWindowTitle("Hata")
+            msgbox.setStandardButtons(QMessageBox.StandardButton.Ok)
+            msgbox.exec()
+            self.copy_crash_logs()
+            self.close()
+        else:
+            self.status_line.append(crash_text)
+    def copy_crash_logs(self):
+        copyfile2dst(Defaults.DEFAULT_LOG_FILE_PATH,r"C:\Users\alper\OneDrive\Desktop\setup.log")
 if __name__ == "__main__":
     app = QApplication([])
     window = SetupUI()

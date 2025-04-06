@@ -52,15 +52,10 @@ QLineEdit {
     color: &quot;black&quot;;
     border-radius: 10px;
     padding: 10;
-    background-repeat: no-repeat;
-    background-position: right;
+
     border: 3px solid  #625fb8;
 }
 
-QLineEdit#setup_path {
-	background-image: url(:/resources/folder32px.png);
-	background-position: right;
-}
 
 QTextEdit {
 	font: 700 9pt &quot;Arial&quot;;
@@ -154,10 +149,48 @@ QTextEdit {
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QLineEdit" name="setup_path">
-           <property name="placeholderText">
-            <string>Lütfen Bir patika giriniz...</string>
+          <widget class="QFrame" name="frame_4">
+           <property name="frameShape">
+            <enum>QFrame::Shape::NoFrame</enum>
            </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QLineEdit" name="path_line_edit">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+              <property name="placeholderText">
+               <string>Lütfen Bir patika seçiniz</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="file_dialog_btn">
+              <property name="minimumSize">
+               <size>
+                <width>45</width>
+                <height>45</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../assets/assets.qrc">
+                <normaloff>:/resources/folder32px.png</normaloff>:/resources/folder32px.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>32</width>
+                <height>32</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
          <item>
@@ -183,7 +216,7 @@ QTextEdit {
        </widget>
       </item>
       <item>
-       <widget class="QTextEdit" name="textEdit">
+       <widget class="QTextEdit" name="status_line">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -192,6 +225,9 @@ QTextEdit {
         </property>
         <property name="frameShape">
          <enum>QFrame::Shape::NoFrame</enum>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
         </property>
         <property name="textInteractionFlags">
          <set>Qt::TextInteractionFlag::NoTextInteraction</set>

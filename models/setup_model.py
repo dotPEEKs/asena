@@ -18,7 +18,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QCheckBox, QFrame, QHBoxLayout,
     QLabel, QLineEdit, QPushButton, QSizePolicy,
     QTextEdit, QVBoxLayout, QWidget)
-from assets import assets
+import assets_rc
+
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
@@ -52,15 +53,10 @@ class Ui_Form(object):
 "    color: \"black\";\n"
 "    border-radius: 10px;\n"
 "    padding: 10;\n"
-"    background-repeat: no-repeat;\n"
-"    background-position: right;\n"
+"\n"
 "    border: 3px solid  #625fb8;\n"
 "}\n"
 "\n"
-"QLineEdit#setup_path {\n"
-"	background-image: url(:/resources/folder32px.png);\n"
-"	background-position: right;\n"
-"}\n"
 "\n"
 "QTextEdit {\n"
 "	font: 700 9pt \"Arial\";\n"
@@ -111,10 +107,30 @@ class Ui_Form(object):
         self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_2 = QVBoxLayout(self.frame_2)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.setup_path = QLineEdit(self.frame_2)
-        self.setup_path.setObjectName(u"setup_path")
+        self.frame_4 = QFrame(self.frame_2)
+        self.frame_4.setObjectName(u"frame_4")
+        self.frame_4.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_4.setFrameShadow(QFrame.Shadow.Raised)
+        self.horizontalLayout_5 = QHBoxLayout(self.frame_4)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.path_line_edit = QLineEdit(self.frame_4)
+        self.path_line_edit.setObjectName(u"path_line_edit")
+        self.path_line_edit.setReadOnly(True)
 
-        self.verticalLayout_2.addWidget(self.setup_path)
+        self.horizontalLayout_5.addWidget(self.path_line_edit)
+
+        self.file_dialog_btn = QPushButton(self.frame_4)
+        self.file_dialog_btn.setObjectName(u"file_dialog_btn")
+        self.file_dialog_btn.setMinimumSize(QSize(45, 45))
+        icon = QIcon()
+        icon.addFile(u":/resources/folder32px.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.file_dialog_btn.setIcon(icon)
+        self.file_dialog_btn.setIconSize(QSize(32, 32))
+
+        self.horizontalLayout_5.addWidget(self.file_dialog_btn)
+
+
+        self.verticalLayout_2.addWidget(self.frame_4)
 
         self.frame_5 = QFrame(self.frame_2)
         self.frame_5.setObjectName(u"frame_5")
@@ -133,13 +149,14 @@ class Ui_Form(object):
 
         self.verticalLayout.addWidget(self.frame_2)
 
-        self.textEdit = QTextEdit(self.main_widget)
-        self.textEdit.setObjectName(u"textEdit")
-        self.textEdit.setMaximumSize(QSize(16777215, 0))
-        self.textEdit.setFrameShape(QFrame.Shape.NoFrame)
-        self.textEdit.setTextInteractionFlags(Qt.TextInteractionFlag.NoTextInteraction)
+        self.status_line = QTextEdit(self.main_widget)
+        self.status_line.setObjectName(u"status_line")
+        self.status_line.setMaximumSize(QSize(16777215, 0))
+        self.status_line.setFrameShape(QFrame.Shape.NoFrame)
+        self.status_line.setReadOnly(True)
+        self.status_line.setTextInteractionFlags(Qt.TextInteractionFlag.NoTextInteraction)
 
-        self.verticalLayout.addWidget(self.textEdit)
+        self.verticalLayout.addWidget(self.status_line)
 
         self.frame_3 = QFrame(self.main_widget)
         self.frame_3.setObjectName(u"frame_3")
@@ -174,7 +191,8 @@ class Ui_Form(object):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.app_text.setText(QCoreApplication.translate("Form", u"Asena", None))
         self.icon_label.setText("")
-        self.setup_path.setPlaceholderText(QCoreApplication.translate("Form", u"L\u00fctfen Bir patika giriniz...", None))
+        self.path_line_edit.setPlaceholderText(QCoreApplication.translate("Form", u"L\u00fctfen Bir patika se\u00e7iniz", None))
+        self.file_dialog_btn.setText("")
         self.persistance_btn.setText(QCoreApplication.translate("Form", u"Her sistem a\u00e7\u0131l\u0131\u015f\u0131nda otomatik ba\u015flatma", None))
         self.exit_btn.setText(QCoreApplication.translate("Form", u"\u00c7\u0131k", None))
         self.setup_btn.setText(QCoreApplication.translate("Form", u"Kur", None))

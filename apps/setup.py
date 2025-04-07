@@ -1,7 +1,6 @@
 import os
 import sys
 
-from pandas.core.dtypes.base import Registry
 
 sys.path.append(os.path.join(os.path.dirname(__file__),".."))
 
@@ -21,6 +20,7 @@ from source.setup import Signals
 from source.setup import ThreadWorker
 from utils.log_utils import create_new_logger_instance
 from utils.log_utils import pack_log_files
+
 logger = create_new_logger_instance(Defaults.DEFAULT_LOG_FILE_PATH)
 
 class SetupUI(QWidget,Ui_Form):

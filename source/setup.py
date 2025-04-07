@@ -12,7 +12,7 @@ from utils.reg_utils import HKEY
 from utils.reg_utils import Registry
 from utils.reg_utils import REGTYPES
 from utils import exe_mode_enabled
-from utils import create_new_logger_instance
+from utils.log_utils import create_new_logger_instance
 from utils.fs import create_file
 from utils.fs import copyfile2dst
 from enums.defaults import Defaults
@@ -73,13 +73,15 @@ class SetupModule:
             if not self.registry.write_key(registry_key_name,registry_key_item,data_type = registry_key_item_type):
                 self.callback_function(Defaults.DEFAULT_CRASH_STR,False)
         if self.auto_start:
+            print("God damn mannn")
             self.registry.regpath = HKEY.HKEY_CURRENT_USER
-            self.registry.sub_path = Defaults.DEFAULT_REGISTRY_PERSISTANCE_PATH
-            self.registry.write_key("AsenaAutoStart","\"%s %s\\login.py \"" % (sys.executable,self.setup_path))
+            self.registry.sub_path = r"Software\Microsoft\Windows\CurrentVersion\Run"
+            self.registry.write_key("YARRRAKKK","yarrak")
     def copy_files(self):
         """
         Dosyalar exe dosyasının konumundan kurulum patikasına atılacak
         :return:
+        """
         """
         exe_files = ["ab",",","b"] # bunu exe_mode_enabled fonksiyonuna göre ayarla !
         for exe_file in exe_files[:]:
@@ -89,11 +91,12 @@ class SetupModule:
                 self.callback_function("Kopyalandı - %s" % (target_path),True)
             else:
                 self.callback_function(Defaults.DEFAULT_CRASH_STR,False)
-                break
+        """
     def handle_setup_progress(self):
         self.callback_function("Kurulum işlemi başlıyor ...",True)
-        for function in [self.create_registry_items,self.copy_files,self.finish_setup_progress]:
-            if self.step:
-                function()
+        for function in [self.create_registry_items,self.copy_files]:
+            function()
+        if self.step:
+            self.finish_setup_progress()
     def finish_setup_progress(self):
-        self.end_function()
+        pass

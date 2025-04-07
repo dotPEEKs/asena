@@ -4,8 +4,7 @@ from enums.winreg_enums import HKEY
 from enums.winreg_enums import REGTYPES
 from source.exceptions import InvalidHKEYPath
 from enums.winreg_enums import is_valid_reg_path
-
-from utils import create_new_logger_instance
+from utils.log_utils import create_new_logger_instance
 
 class Registry:
     def __init__(self,
@@ -18,7 +17,7 @@ class Registry:
         """
         self.reg_path = reg_path
         self.sub_path = sub_path
-        self.log = create_new_logger_instance(__name__,"registry_log.log")
+        self.log = create_new_logger_instance(__name__)
         self.log.info("Module Initialized !")
     def write_key(self,value_name: str,value,*,data_type = REGTYPES.REG_SZ) -> bool:
         """
@@ -41,7 +40,7 @@ class Registry:
         """
         it's read key given value name
         :param value_name:
-        :return:
+        :returns: tuple[value,value_type]
         """
         try:
             hReg = winreg.OpenKey(self.reg_path,self.sub_path,0,winreg.KEY_READ)

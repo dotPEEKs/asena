@@ -19,8 +19,8 @@ from utils.fs import WriteOk,ReadOk,copyfile2dst
 from source.setup import SetupModule
 from source.setup import Signals
 from source.setup import ThreadWorker
-from utils import create_new_logger_instance
-
+from utils.log_utils import create_new_logger_instance
+from utils.log_utils import pack_log_files
 logger = create_new_logger_instance(Defaults.DEFAULT_LOG_FILE_PATH)
 
 class SetupUI(QWidget,Ui_Form):
@@ -33,6 +33,7 @@ class SetupUI(QWidget,Ui_Form):
         self.setupUi(self)
         self.set_line_edit_path()
         self.set_all_signals()
+
     def launch_file_dialog(self):
         file_dialog_window = QFileDialog()
         file_dialog_window.setWindowTitle("Patika seçin ")
@@ -78,6 +79,7 @@ class SetupUI(QWidget,Ui_Form):
             msgbox.setStandardButtons(QMessageBox.StandardButton.Ok)
             msgbox.exec()
             self.copy_crash_logs()
+            pack_log_files()
             self.close()
         else:
             self.status_line.append(crash_text)

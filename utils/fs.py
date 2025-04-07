@@ -2,9 +2,11 @@
 
 import os
 import ctypes
+
+from enums.defaults import Defaults
 from enums.fs_enums import AccessTypes
-from utils import create_new_logger_instance
-logger = create_new_logger_instance("fs")
+from utils.log_utils import create_new_logger_instance
+logger = create_new_logger_instance()
 
 def WriteOk(path: str) -> bool:
     """
@@ -61,11 +63,11 @@ def create_file(filename: str,throw_exc = False,force = False) -> bool:
 
 def create_directory(directory_name: str,throw_exc = False,force = False) -> bool:
     """
-    creates a folder that doesn't exist, the force parameter forces it to be recreated if it exists
+    creates a folder that doesn't exist
     if you want to throw an error, you must set the throw_exc parameter to true
     """
     try:
-        os.makedirs(directory_name,exist_ok = force)
+        os.makedirs(directory_name)
     except Exception as error:
         if throw_exc:
             raise Exception(error)

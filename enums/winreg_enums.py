@@ -16,7 +16,7 @@ class REGTYPES(IntEnum):
     REG_BINARY = winreg.REG_BINARY
 
 
-def is_valid_reg_path(hkey_path: int | IntEnum) -> bool:
+def is_valid_reg_path(hkey_path: int) -> bool:
     """
     it's checking given path valid path or invalid path returns True or False
     :param value:

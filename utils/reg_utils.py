@@ -5,7 +5,7 @@ from enums.winreg_enums import REGTYPES
 from source.exceptions import InvalidHKEYPath
 from enums.winreg_enums import is_valid_reg_path
 from utils.log_utils import create_new_logger_instance
-
+from containers import RegistryReadContainer
 class Registry:
     def __init__(self,
         reg_path: int | HKEY,
@@ -18,7 +18,6 @@ class Registry:
         self.reg_path = reg_path
         self.sub_path = sub_path
         self.log = create_new_logger_instance(__name__)
-        self.log.info("Module Initialized !")
     def write_key(self,value_name: str,value,*,data_type = REGTYPES.REG_SZ) -> bool:
         """
         it's write specified key
@@ -33,10 +32,10 @@ class Registry:
             winreg.SetValueEx(hReg,value_name,0,data_type,value)
             winreg.CloseKey(hReg)
         except Exception as fault:
-            self.log.critical("Write Error: %s - Path: %s" % (fault,repr(self.reg_path)))
+            self.log.critical("Write Error: %s - Path: %s Value: %s Value Name: %s Data Type: %s" % (fault,repr(self.reg_path),value,value_name,repr(data_type)))
             return False
         return True
-    def read_key(self,value_name: str) -> tuple:
+    def read_key(self,value_name: str) -> RegistryReadContainer:
         """
         it's read key given value name
         :param value_name:
@@ -46,7 +45,7 @@ class Registry:
             hReg = winreg.OpenKey(self.reg_path,self.sub_path,0,winreg.KEY_READ)
             value,regtype = winreg.QueryValueEx(hReg,value_name)
             winreg.CloseKey(hReg)
-            return value,regtype
+            return RegistryReadContainer(value = value,value_type = regtype)
         except Exception as fault:
             self.log.critical("Read Error: %s Value Name: %s - Base Path: %s" % (fault,value_name,repr(self.reg_path)))
             return False

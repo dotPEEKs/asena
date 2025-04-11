@@ -47,7 +47,10 @@ QTableCornerButton::section {
 QStackedWidget {
 	border: 1px solid gray;
 }
-</string>
+
+QScrollArea {
+	background-color: &quot;yellow&quot;;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="minimumSize">
@@ -181,6 +184,23 @@ QStackedWidget {
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="minisidebar_table_management_btn">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../assets/assets.qrc">
+              <normaloff>:/resources/table32px.png</normaloff>:/resources/table32px.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="minisidenar_endorsement_btn">
             <property name="text">
              <string/>
@@ -256,7 +276,7 @@ QStackedWidget {
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>193</height>
+              <height>0</height>
              </size>
             </property>
            </spacer>
@@ -316,6 +336,13 @@ QStackedWidget {
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="table_management_btn">
+            <property name="text">
+             <string>MASA TAKIBI</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="endorsement_btn">
             <property name="styleSheet">
              <string notr="true"/>
@@ -351,10 +378,13 @@ QStackedWidget {
             <property name="orientation">
              <enum>Qt::Orientation::Vertical</enum>
             </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Expanding</enum>
+            </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>198</height>
+              <height>193</height>
              </size>
             </property>
            </spacer>
@@ -756,7 +786,30 @@ QStackedWidget {
               <item>
                <widget class="QStackedWidget" name="options_tab">
                 <widget class="QWidget" name="db_management_tab">
-                 <layout class="QHBoxLayout" name="horizontalLayout_10"/>
+                 <layout class="QHBoxLayout" name="horizontalLayout_10">
+                  <item>
+                   <widget class="QScrollArea" name="scrollArea">
+                    <property name="widgetResizable">
+                     <bool>true</bool>
+                    </property>
+                    <widget class="QWidget" name="scroll_area">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>614</width>
+                       <height>358</height>
+                      </rect>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_5">
+                      <item>
+                       <layout class="QGridLayout" name="gridLayout"/>
+                      </item>
+                     </layout>
+                    </widget>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                 <widget class="QWidget" name="reset_tab"/>
                </widget>

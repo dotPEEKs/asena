@@ -2,6 +2,9 @@ import os
 import sys
 import time
 
+from PySide6.QtWidgets import QMessageBox
+from PySide6.QtWidgets import QGridLayout
+from PySide6.QtWidgets import QScrollArea
 from PySide6.QtWidgets import QPushButton
 from PySide6.QtWidgets import QHeaderView,QTabWidget
 from PySide6.QtWidgets import QStackedWidget,QWidget
@@ -25,6 +28,7 @@ path = os.path.join(
 )
 sys.path.append(path)
 from models.main_window import Ui_MainWindow
+from models.custom_widgets import QCardWidget
 
 class AsenaMainWindow(QMainWindow,Ui_MainWindow):
     def __init__(self):
@@ -39,6 +43,7 @@ class AsenaMainWindow(QMainWindow,Ui_MainWindow):
         self.slide_sidebar_animation_handler = self.create_animation_object(self.slide_sidebar)
         self.stretch_all_table_widgets()
         self.orders_history_btn.setCheckable(False)
+        self.append_item_to_grid_layout()
     def handle_sidebar(self):
         sidebar_width = 153
         collapsed_width = 0
@@ -68,11 +73,9 @@ class AsenaMainWindow(QMainWindow,Ui_MainWindow):
         self.slide_sidebar_animation_handler.start()
         self.inside_container_animation_handler.start()
     def mousePressEvent(self, event):
-
         if event.button() == Qt.LeftButton:
             self._drag_position = event.globalPosition().toPoint()
     def mouseMoveEvent(self, event):
-
         if event.buttons() & Qt.LeftButton:
             delta = QPoint(event.globalPosition().toPoint() - self._drag_position)
             self.move(self.pos() + delta)
@@ -103,6 +106,23 @@ class AsenaMainWindow(QMainWindow,Ui_MainWindow):
             print(table_widget)
             table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
             table_widget.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
+    def append_item_to_grid_layout(self):
+        grid_layout = QGridLayout()
+        embed_stacked_widget = self.stackedWidget.findChild(QStackedWidget)
+        scroll_area = embed_stacked_widget.findChild(QScrollArea)
+
+        for index in range(0,18):
+            row = index // 3
+            col = index % 3
+            card_widget = QCardWidget(label_text=f"Masa {row}",image = os.path.join(os.path.dirname(__file__),"..","assets","table32px.png"))
+            card_widget.mouse_long_press.connect(lambda:print("Omygod"))
+
+            grid_layout.addWidget(card_widget,col,row)
+        scroll_area.setLayout(grid_layout)
+    def kill_timer(self):
+        f = QMessageBox()
+        f.setText("Uzun basma aktif")
+        f.exec()
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = AsenaMainWindow()

@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="resources">
+    <file>table32px.png</file>
     <file>database_btn.png</file>
     <file>folder32px.png</file>
     <file>endorsement_btn.png</file>

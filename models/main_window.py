@@ -15,11 +15,12 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QHBoxLayout,
-    QHeaderView, QLabel, QMainWindow, QPushButton,
-    QSizePolicy, QSpacerItem, QStackedWidget, QTableWidget,
-    QTableWidgetItem, QToolBox, QVBoxLayout, QWidget)
-from assets import assets
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QGridLayout,
+    QHBoxLayout, QHeaderView, QLabel, QMainWindow,
+    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
+    QStackedWidget, QTableWidget, QTableWidgetItem, QToolBox,
+    QVBoxLayout, QWidget)
+import assets_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -59,7 +60,10 @@ class Ui_MainWindow(object):
 "QStackedWidget {\n"
 "	border: 1px solid gray;\n"
 "}\n"
-"")
+"\n"
+"QScrollArea {\n"
+"	background-color: \"yellow\";\n"
+"}")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setMinimumSize(QSize(859, 529))
@@ -117,43 +121,52 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.minisidebar_orders_screen_btn)
 
+        self.minisidebar_table_management_btn = QPushButton(self.minisidebar)
+        self.minisidebar_table_management_btn.setObjectName(u"minisidebar_table_management_btn")
+        icon3 = QIcon()
+        icon3.addFile(u":/resources/table32px.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.minisidebar_table_management_btn.setIcon(icon3)
+        self.minisidebar_table_management_btn.setIconSize(QSize(32, 32))
+
+        self.verticalLayout_3.addWidget(self.minisidebar_table_management_btn)
+
         self.minisidenar_endorsement_btn = QPushButton(self.minisidebar)
         self.minisidenar_endorsement_btn.setObjectName(u"minisidenar_endorsement_btn")
-        icon3 = QIcon()
-        icon3.addFile(u":/resources/endorsement_btn.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.minisidenar_endorsement_btn.setIcon(icon3)
+        icon4 = QIcon()
+        icon4.addFile(u":/resources/endorsement_btn.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.minisidenar_endorsement_btn.setIcon(icon4)
         self.minisidenar_endorsement_btn.setIconSize(QSize(32, 32))
 
         self.verticalLayout_3.addWidget(self.minisidenar_endorsement_btn)
 
         self.minisidebar_stock_management_btn = QPushButton(self.minisidebar)
         self.minisidebar_stock_management_btn.setObjectName(u"minisidebar_stock_management_btn")
-        icon4 = QIcon()
-        icon4.addFile(u":/resources/database_btn.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.minisidebar_stock_management_btn.setIcon(icon4)
+        icon5 = QIcon()
+        icon5.addFile(u":/resources/database_btn.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.minisidebar_stock_management_btn.setIcon(icon5)
         self.minisidebar_stock_management_btn.setIconSize(QSize(32, 32))
 
         self.verticalLayout_3.addWidget(self.minisidebar_stock_management_btn)
 
         self.minisidebar_settings_btn = QPushButton(self.minisidebar)
         self.minisidebar_settings_btn.setObjectName(u"minisidebar_settings_btn")
-        icon5 = QIcon()
-        icon5.addFile(u":/resources/settings.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.minisidebar_settings_btn.setIcon(icon5)
+        icon6 = QIcon()
+        icon6.addFile(u":/resources/settings.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.minisidebar_settings_btn.setIcon(icon6)
         self.minisidebar_settings_btn.setIconSize(QSize(32, 32))
 
         self.verticalLayout_3.addWidget(self.minisidebar_settings_btn)
 
         self.minisidebar_exit_btn = QPushButton(self.minisidebar)
         self.minisidebar_exit_btn.setObjectName(u"minisidebar_exit_btn")
-        icon6 = QIcon()
-        icon6.addFile(u":/resources/logout.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.minisidebar_exit_btn.setIcon(icon6)
+        icon7 = QIcon()
+        icon7.addFile(u":/resources/logout.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.minisidebar_exit_btn.setIcon(icon7)
         self.minisidebar_exit_btn.setIconSize(QSize(32, 32))
 
         self.verticalLayout_3.addWidget(self.minisidebar_exit_btn)
 
-        self.verticalSpacer = QSpacerItem(20, 193, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_3.addItem(self.verticalSpacer)
 
@@ -185,6 +198,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.orders_screen_btn)
 
+        self.table_management_btn = QPushButton(self.slide_sidebar)
+        self.table_management_btn.setObjectName(u"table_management_btn")
+
+        self.verticalLayout_2.addWidget(self.table_management_btn)
+
         self.endorsement_btn = QPushButton(self.slide_sidebar)
         self.endorsement_btn.setObjectName(u"endorsement_btn")
         self.endorsement_btn.setStyleSheet(u"")
@@ -206,7 +224,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.exit_btn)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 198, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalSpacer_2 = QSpacerItem(20, 193, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_2.addItem(self.verticalSpacer_2)
 
@@ -245,9 +263,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.setContentsMargins(0, 3, 0, 0)
         self.sidebar_toggle_btn = QPushButton(self.sidebar_toggle_btn_frame)
         self.sidebar_toggle_btn.setObjectName(u"sidebar_toggle_btn")
-        icon7 = QIcon()
-        icon7.addFile(u":/resources/sidebar_toggle.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.sidebar_toggle_btn.setIcon(icon7)
+        icon8 = QIcon()
+        icon8.addFile(u":/resources/sidebar_toggle.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.sidebar_toggle_btn.setIcon(icon8)
         self.sidebar_toggle_btn.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_4.addWidget(self.sidebar_toggle_btn, 0, Qt.AlignmentFlag.AlignTop)
@@ -289,9 +307,9 @@ class Ui_MainWindow(object):
         self.minimize_btn.setObjectName(u"minimize_btn")
         self.minimize_btn.setMinimumSize(QSize(16, 16))
         self.minimize_btn.setStyleSheet(u"")
-        icon8 = QIcon()
-        icon8.addFile(u":/resources/minimize_new.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.minimize_btn.setIcon(icon8)
+        icon9 = QIcon()
+        icon9.addFile(u":/resources/minimize_new.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.minimize_btn.setIcon(icon9)
         self.minimize_btn.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_6.addWidget(self.minimize_btn)
@@ -299,9 +317,9 @@ class Ui_MainWindow(object):
         self.maximize_btn = QPushButton(self.corner_button_frame)
         self.maximize_btn.setObjectName(u"maximize_btn")
         self.maximize_btn.setMinimumSize(QSize(16, 16))
-        icon9 = QIcon()
-        icon9.addFile(u":/resources/fullscreen.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.maximize_btn.setIcon(icon9)
+        icon10 = QIcon()
+        icon10.addFile(u":/resources/fullscreen.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.maximize_btn.setIcon(icon10)
         self.maximize_btn.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_6.addWidget(self.maximize_btn)
@@ -309,9 +327,9 @@ class Ui_MainWindow(object):
         self.close_btn = QPushButton(self.corner_button_frame)
         self.close_btn.setObjectName(u"close_btn")
         self.close_btn.setMinimumSize(QSize(16, 16))
-        icon10 = QIcon()
-        icon10.addFile(u":/resources/close_new.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.close_btn.setIcon(icon10)
+        icon11 = QIcon()
+        icon11.addFile(u":/resources/close_new.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.close_btn.setIcon(icon11)
         self.close_btn.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_6.addWidget(self.close_btn)
@@ -422,6 +440,23 @@ class Ui_MainWindow(object):
         self.db_management_tab.setObjectName(u"db_management_tab")
         self.horizontalLayout_10 = QHBoxLayout(self.db_management_tab)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.scrollArea = QScrollArea(self.db_management_tab)
+        self.scrollArea.setObjectName(u"scrollArea")
+        self.scrollArea.setWidgetResizable(True)
+        self.scroll_area = QWidget()
+        self.scroll_area.setObjectName(u"scroll_area")
+        self.scroll_area.setGeometry(QRect(0, 0, 614, 358))
+        self.verticalLayout_5 = QVBoxLayout(self.scroll_area)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.gridLayout = QGridLayout()
+        self.gridLayout.setObjectName(u"gridLayout")
+
+        self.verticalLayout_5.addLayout(self.gridLayout)
+
+        self.scrollArea.setWidget(self.scroll_area)
+
+        self.horizontalLayout_10.addWidget(self.scrollArea)
+
         self.options_tab.addWidget(self.db_management_tab)
         self.reset_tab = QWidget()
         self.reset_tab.setObjectName(u"reset_tab")
@@ -455,6 +490,7 @@ class Ui_MainWindow(object):
         self.minisidebar_active_orders_btn.setText("")
         self.minisidebar_orders_history_btn.setText("")
         self.minisidebar_orders_screen_btn.setText("")
+        self.minisidebar_table_management_btn.setText("")
         self.minisidenar_endorsement_btn.setText("")
         self.minisidebar_stock_management_btn.setText("")
         self.minisidebar_settings_btn.setText("")
@@ -462,6 +498,7 @@ class Ui_MainWindow(object):
         self.active_orders_btn.setText(QCoreApplication.translate("MainWindow", u"AKTIF SIPARI\u015eLER", None))
         self.orders_history_btn.setText(QCoreApplication.translate("MainWindow", u"SIPARI\u015e GE\u00c7MI\u015eI", None))
         self.orders_screen_btn.setText(QCoreApplication.translate("MainWindow", u"SIPARI\u015e EKRANI", None))
+        self.table_management_btn.setText(QCoreApplication.translate("MainWindow", u"MASA TAKIBI", None))
         self.endorsement_btn.setText(QCoreApplication.translate("MainWindow", u"CIRO TAK\u0130B\u0130", None))
         self.stock_management_btn.setText(QCoreApplication.translate("MainWindow", u"STOK YONETIMI", None))
         self.settings_btn.setText(QCoreApplication.translate("MainWindow", u"AYARLAR", None))
